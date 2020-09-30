@@ -1,11 +1,96 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
   <head>
     <meta charset="utf-8">
     <title>Uzuhama Background</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-alpha1/html2canvas.min.js"></script>
+
+    </script>
   </head>
+
+
   <body>
-    <script src="./function.js"></script>
+    <h2><span class='hl'>UZUHAMA</span> 배경색 바꾸기</h2>
+
+      <div class="controls">
+        <div class="inputDiv">
+          <input id="fileElem" type="file" name="img" value="img" style="display:none">
+          <a href="#" id="fileSelect">1. 이미지 불러오기</a>
+        </div>
+
+        <div class="inputDiv">
+          <label for="base">2. 색 선택</label>
+          <input id="base" type="color" name="base" value="#68829E">
+        </div>
+
+        <div class="inputDiv">
+          <button id="downloadBtn" type="button" name="button">3. 다운받기</button>
+        </div>
+      </div>
+
+      <div class="imgDiv">
+        <canvas id="imgDiv" class="imgBg"></canvas>
+      </div>
+
+
+    <script src="function.js"></script>
+
   </body>
 </html>
+
+<script type="text/javascript">
+// const btn = document.getElementById("downloadBtn");
+//
+// btn.addEventListener('click', openImg);
+//
+// function openImg() {
+//   html2canvas(imgDiv, {
+//     onrendered: function(canvas) {
+//       var myImage = canvas.toDataURL("image/jpeg");
+//       var iframe = '<iframe src="' + myImage + '" frameborder="0" style="border:0; top:0px; left:0px; bottom:0px; right:0px; width:100%; height:100%;" allowfullscreen></iframe>'
+//       var x= window.open();
+//       x.document.open();
+//       x.document.write(iframe);
+//       x.document.close();
+//     }
+//   })
+// };
+//
+
+document.getElementById("downloadBtn").addEventListener("click", function() {
+
+    html2canvas(document.getElementById("imgDiv")).then(function(canvas) {
+        saveAs(canvas.toDataURL(), 'file-name.png');
+    });
+});
+
+
+function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+        link.href = uri;
+        link.download = filename;
+
+        //Firefox requires the link to be in the body
+        document.body.appendChild(link);
+
+        //simulate click
+        link.click();
+
+        //remove the link when done
+        document.body.removeChild(link);
+
+    } else {
+
+        window.open(uri);
+
+    }
+}
+
+</script>
