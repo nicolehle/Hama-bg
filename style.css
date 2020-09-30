@@ -1,12 +1,11 @@
-@import url(http://fonts.googleapis.com/earlyaccess/notosanskr.css);
-
 :root {
   --base: #68829E;
 }
 
 
 body {
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: sans-serif;
+  font-weight: bold;
   display: block;
   height: 100%;
   margin: 0;
